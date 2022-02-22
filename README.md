@@ -7,11 +7,15 @@ our Java Enterprise course at IT-Högskolan, Gothenburg.
 
 1. `Download` [Payara Server (full)](https://www.payara.fish/downloads/payara-platformcommunity-edition/ "Payara Server Download")
 2. `Unzip the Payara download` to a folder where you have admin access
-3. `Fork or clone` this repository
-4. `Open project in an IDE` (IntelliJ, etc)
-5. Add Payara server as your `run configuration`
-    - Add the `build 'student-management-system:war' artifact` task
-6. `Run` the Payara Server
+3. `Clone` this project to your local computer:
+   1. Open a `terminal` in the folder you want the project to end up
+   2. Run `git clone https://github.com/LordRekishi/student-management-system.git`
+4. `Package` the project using `Maven`:
+   1. Open a `terminal` in the project folder
+   2. Run `./mvnw clean package`
+5. `Start` the application on `Payara Server`
+   1. Open a `terminal` in the `payara/bin` directory where you'll find the `asadmin` file
+   2. Run `asadmin deploy <path to  war file directory>/student-management-system.war`
 
 ## How to use
 

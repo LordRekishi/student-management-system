@@ -56,12 +56,11 @@ public class StudentRest {
         return Response.ok(foundStudents).build();
     }
 
-    @Path("")
+    @Path("{id}")
     @PUT
-    public Response updateStudent(Student student) {
-        Long id = student.getId();
+    public Response updateStudent(@PathParam("id") Long id, Student student) {
         Student foundStudent = studentService.getById(id);
-        if (foundStudent == null)
+        if (foundStudent != student)
             throw new StudentsNotFoundException(ErrorMessage.updateStudent());
 
         studentService.updateStudent(student);
