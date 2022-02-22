@@ -69,7 +69,7 @@ Use `Insomnia` to send requests to the application: [Download here!](https://ins
 
 `GET /api/v1/students/filter?lastname={name}` - `get` a list of `all students by last name`, using a `query parameter`.
 
-`PUT /api/v1/students` - `update` a whole `student object` already in the database using JSON formatting. Don't forget
+`PUT /api/v1/students/{id}` - `update` a whole `student object` already in the database using JSON formatting. Don't forget
 to add all fields for the object.
 
 `DELETE /api/v1/students/{id}` - `delete` a `student` from the database using a `path parameter`.
