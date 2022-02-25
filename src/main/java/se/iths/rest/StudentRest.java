@@ -6,10 +6,13 @@ import se.iths.error.StudentsNotFoundException;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 @Path("students")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,9 +22,16 @@ public class StudentRest {
     @Inject
     StudentService studentService;
 
+    @Inject
+    Validator validator;
+
     @Path("")
     @POST
     public Response createStudent(Student student) {
+        Set<ConstraintViolation<Student>> violations = validator.validate(student);
+        if (!violations.isEmpty())
+            throw new WebApplicationException(ErrorMessage.createStudent(violations));
+
         studentService.createStudent(student);
         return Response.status(Response.Status.CREATED).entity(student).build();
     }

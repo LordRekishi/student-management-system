@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -12,11 +13,12 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotEmpty
+    @NotEmpty(message = "First name can not be Empty")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "Last name can not be Empty")
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message = "Please provide an email")
+    @Email(message = "Email not correct format")
     private String email;
     private String phoneNumber;
 
