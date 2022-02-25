@@ -30,9 +30,6 @@ public class StudentRest {
     @GET
     public Response getAll() {
         List<Student> foundStudents = studentService.getAll();
-        if (foundStudents.isEmpty())
-            throw new StudentsNotFoundException(ErrorMessage.getAll());
-
         return Response.ok(foundStudents).build();
     }
 
@@ -50,9 +47,6 @@ public class StudentRest {
     @GET
     public Response getByLastName(@QueryParam("lastname") String lastName) {
         List<Student> foundStudents = studentService.getByLastName(lastName);
-        if (foundStudents.isEmpty())
-            throw new StudentsNotFoundException(ErrorMessage.getByLastName(lastName));
-
         return Response.ok(foundStudents).build();
     }
 

@@ -6,10 +6,10 @@ import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
 
 public class ErrorMessage {
-    LocalDateTime localDateTime = LocalDateTime.now();
-    String errorCode;
-    String message;
-    String url;
+    private final LocalDateTime localDateTime = LocalDateTime.now();
+    private final String errorCode;
+    private final String message;
+    private final String url;
 
     public ErrorMessage(String errorCode, String message, String url) {
         this.errorCode = errorCode;
@@ -18,23 +18,9 @@ public class ErrorMessage {
     }
 
     @JsonbTransient
-    public static Response getAll() {
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity(new ErrorMessage("404", "NO STUDENTS FOUND!", "/api/v1/students"))
-                .type(MediaType.APPLICATION_JSON_TYPE).build();
-    }
-
-    @JsonbTransient
     public static Response getByID(Long id) {
         return Response.status(Response.Status.NOT_FOUND)
                 .entity(new ErrorMessage("404", "STUDENT with ID " + id + " NOT FOUND!", "/api/v1/students/" + id))
-                .type(MediaType.APPLICATION_JSON_TYPE).build();
-    }
-
-    @JsonbTransient
-    public static Response getByLastName(String lastName) {
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity(new ErrorMessage("404", "STUDENT with last name " + lastName + " NOT FOUND!", "/api/v1/students/filter?lastname=" + lastName))
                 .type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 
