@@ -19,7 +19,9 @@ our Java Enterprise course at IT-Högskolan, Gothenburg.
 
 ## How to use
 
-Use `Insomnia` to send requests to the application: [Download here!](https://insomnia.rest/download "Insomnia Download")
+Use `Insomnia` to send requests to the
+application: [Download here!](https://insomnia.rest/download "Insomnia Download")   
+Navigate to: `http://localhost:8080/student-management-system/<endpoint>`
 
 ### Endpoints
 
