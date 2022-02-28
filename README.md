@@ -25,7 +25,7 @@ Navigate to: `http://localhost:8080/student-management-system/<endpoint>`
 
 ### Endpoints
 
-`POST /api/v1/students` - `add` a `student object` to the database using JSON formatting:
+`POST` `/api/v1/students` - `add` a `student object` to the database using JSON formatting:
 
 ```json
 {
@@ -36,7 +36,7 @@ Navigate to: `http://localhost:8080/student-management-system/<endpoint>`
 }
 ```
 
-`GET /api/v1/students` - `get` a list of `all students` in the database, returned as a list of JSON objects:
+`GET` `/api/v1/students` - `get` a list of `all students` in the database, returned as a list of JSON objects:
 
 ```json
 [
@@ -57,7 +57,7 @@ Navigate to: `http://localhost:8080/student-management-system/<endpoint>`
 ]
 ```
 
-`GET /api/v1/students/{id}` - `get` a `student by ID`, using a `path parameter`. Returned as a JSON object:
+`GET` `/api/v1/students/{id}` - `get` a `student by ID`, using a `path parameter`. Returned as a JSON object:
 
 ```json
 {
@@ -69,11 +69,11 @@ Navigate to: `http://localhost:8080/student-management-system/<endpoint>`
 }
 ```
 
-`GET /api/v1/students/filter?lastname={name}` - `get` a list of `all students by last name`, using a `query parameter`.
+`GET` `/api/v1/students/filter?lastname={name}` - `get` a list of `all students by last name`, using a `query parameter`.
 
-`PUT /api/v1/students/{id}` - `update` a whole `student object` already in the database using JSON formatting. Don't forget
+`PUT` `/api/v1/students/{id}` - `update` a whole `student object` already in the database using JSON formatting. Don't forget
 to add all fields for the object.
 
-`DELETE /api/v1/students/{id}` - `delete` a `student` from the database using a `path parameter`.
+`DELETE` `/api/v1/students/{id}` - `delete` a `student` from the database using a `path parameter`.
 
 Copyright (c) 2022 by Patrik Fallqvist Magnusson
