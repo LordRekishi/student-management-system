@@ -1,8 +1,8 @@
 package se.iths.rest;
 
 import se.iths.entity.Student;
+import se.iths.error.EntitysNotFoundException;
 import se.iths.error.ErrorMessage;
-import se.iths.error.StudentsNotFoundException;
 import se.iths.service.StudentService;
 
 import javax.inject.Inject;
@@ -48,7 +48,7 @@ public class StudentRest {
     public Response getById(@PathParam("id") Long id) {
         Student foundStudent = studentService.getById(id);
         if (foundStudent == null)
-            throw new StudentsNotFoundException(ErrorMessage.getByID(id));
+            throw new EntitysNotFoundException(ErrorMessage.getStudentByID(id));
 
         return Response.ok(foundStudent).build();
     }
@@ -65,7 +65,7 @@ public class StudentRest {
     public Response updateStudent(@PathParam("id") Long id, Student student) {
         Student foundStudent = studentService.getById(id);
         if (foundStudent == null)
-            throw new StudentsNotFoundException(ErrorMessage.updateStudent());
+            throw new EntitysNotFoundException(ErrorMessage.updateStudent());
 
         studentService.updateStudent(student);
         return Response.status(Response.Status.ACCEPTED).entity(student).build();
