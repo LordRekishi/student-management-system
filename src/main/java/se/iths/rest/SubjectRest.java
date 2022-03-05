@@ -1,9 +1,13 @@
 package se.iths.rest;
 
+import se.iths.entity.Student;
 import se.iths.entity.Subject;
+import se.iths.entity.Teacher;
 import se.iths.error.EntitysNotFoundException;
 import se.iths.error.ErrorMessage;
+import se.iths.service.StudentService;
 import se.iths.service.SubjectService;
+import se.iths.service.TeacherService;
 
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
@@ -21,6 +25,12 @@ public class SubjectRest {
 
     @Inject
     SubjectService subjectService;
+
+    @Inject
+    StudentService studentService;
+
+    @Inject
+    TeacherService teacherService;
 
     @Inject
     Validator validator;
@@ -80,6 +90,36 @@ public class SubjectRest {
 
         subjectService.deleteSubject(id);
         return Response.ok().build();
+    }
+
+    @Path("{id}")
+    @PUT
+    public Response addStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
+        Subject foundSubject = subjectService.getById(id);
+        Student foundStudent = studentService.getById(studentId);
+
+        if (foundSubject == null || foundStudent == null)
+            throw new EntitysNotFoundException(ErrorMessage.updateSubject());
+
+        foundSubject.addStudent(foundStudent);
+        subjectService.updateSubject(foundSubject);
+
+        return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
+    }
+
+    @Path("{id}")
+    @PUT
+    public Response addTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
+        Subject foundSubject = subjectService.getById(id);
+        Teacher foundTeacher = teacherService.getById(teacherId);
+
+        if (foundSubject == null || foundTeacher == null)
+            throw new EntitysNotFoundException(ErrorMessage.updateSubject());
+
+        foundSubject.setTeacher(foundTeacher);
+        subjectService.updateSubject(foundSubject);
+
+        return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
 }

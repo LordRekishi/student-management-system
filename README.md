@@ -5,7 +5,7 @@ our Java Enterprise course at IT-Högskolan, Gothenburg.
 
 ## Deployment
 
-1. `Download` [Payara Server (full)](https://www.payara.fish/downloads/payara-platformcommunity-edition/ "Payara Server Download")
+1. `Download` [Payara Server (full)](https://www.payara.fish/downloads/payara-platform-community-edition/ "Payara Server Download")
 2. `Unzip the Payara download` to a folder where you have admin access
 3. `Clone` this project to your local computer:
    1. Open a `terminal` in the folder you want the project to end up

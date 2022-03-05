@@ -25,6 +25,16 @@ public class Student {
     @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
     private Set<Subject> subjects = new HashSet<>();
 
+    public Student(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Student() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -76,11 +86,19 @@ public class Student {
 
     public void addSubject(Subject subject) {
         subjects.add(subject);
-        subject.addStudent(this);
+        subject.addOnlyStudent(this);
+    }
+
+    public void addOnlySubject(Subject subject) {
+        subjects.add(subject);
     }
 
     public void removeSubject(Subject subject) {
         subjects.remove(subject);
-        subject.removeStudent(this);
+        subject.removeOnlyStudent(this);
+    }
+
+    public void removeOnlySubject(Subject subject) {
+        subjects.remove(subject);
     }
 }

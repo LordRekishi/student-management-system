@@ -24,6 +24,13 @@ public class Subject {
     @ManyToOne(fetch = FetchType.LAZY)
     private Teacher teacher;
 
+    public Subject(String name) {
+        this.name = name;
+    }
+
+    public Subject() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -54,15 +61,24 @@ public class Subject {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+        teacher.addOnlySubject(this);
     }
 
     public void addStudent(Student student) {
         students.add(student);
-        student.addSubject(this);
+        student.addOnlySubject(this);
+    }
+
+    public void addOnlyStudent(Student student) {
+        students.add(student);
     }
 
     public void removeStudent(Student student) {
         students.remove(student);
-        student.removeSubject(this);
+        student.removeOnlySubject(this);
+    }
+
+    public void removeOnlyStudent(Student student) {
+        students.remove(student);
     }
 }

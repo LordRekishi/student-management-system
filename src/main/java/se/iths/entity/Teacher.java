@@ -20,6 +20,14 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private Set<Subject> subjects = new HashSet<>();
 
+    public Teacher(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Teacher() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,6 +64,10 @@ public class Teacher {
     public void addSubject(Subject subject) {
         subjects.add(subject);
         subject.setTeacher(this);
+    }
+
+    public void addOnlySubject(Subject subject) {
+        subjects.add(subject);
     }
 
     public void removeSubject(Subject subject) {
