@@ -37,6 +37,14 @@ public class SampleDataGenerator {
         Subject subject5 = new Subject("Webb");
         Subject subject6 = new Subject("Spring Framework");
 
+
+        entityManager.persist(student1);
+        entityManager.persist(student2);
+        entityManager.persist(student3);
+        entityManager.persist(student4);
+        entityManager.persist(student5);
+        entityManager.persist(student6);
+
         subject1.addStudent(student1);
         subject1.addStudent(student2);
         subject2.addStudent(student3);
@@ -49,6 +57,10 @@ public class SampleDataGenerator {
         subject5.addStudent(student4);
         subject6.addStudent(student5);
         subject6.addStudent(student6);
+
+        entityManager.persist(teacher1);
+        entityManager.persist(teacher2);
+        entityManager.persist(teacher3);
 
         subject1.setTeacher(teacher1);
         subject2.setTeacher(teacher1);
