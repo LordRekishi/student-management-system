@@ -92,7 +92,7 @@ public class SubjectRest {
         return Response.ok().build();
     }
 
-    @Path("{id}")
+    @Path("{id}/student")
     @PUT
     public Response addStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
         Subject foundSubject = subjectService.getById(id);
@@ -107,7 +107,7 @@ public class SubjectRest {
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
-    @Path("{id}")
+    @Path("{id}/teacher")
     @PUT
     public Response addTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
         Subject foundSubject = subjectService.getById(id);
