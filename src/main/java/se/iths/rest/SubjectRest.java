@@ -122,4 +122,38 @@ public class SubjectRest {
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
+    @Path("{id}/student")
+    @PUT
+    public Response removeStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
+        Subject foundSubject = subjectService.getById(id);
+        Student foundStudent = studentService.getById(studentId);
+
+        if (foundSubject == null || foundStudent == null)
+            throw new EntitysNotFoundException(ErrorMessage.updateSubject());
+
+        foundSubject.removeStudent(foundStudent);
+        subjectService.updateSubject(foundSubject);
+
+        return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
+    }
+
+    @Path("{id}/teacher")
+    @PUT
+    public Response removeTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
+        Subject foundSubject = subjectService.getById(id);
+        Teacher foundTeacher = teacherService.getById(teacherId);
+
+        if (foundSubject == null || foundTeacher == null)
+            throw new EntitysNotFoundException(ErrorMessage.updateSubject());
+
+        if (foundSubject.getTeacher() == foundTeacher)
+            foundSubject.setTeacher(null);
+        else
+            throw new EntitysNotFoundException(ErrorMessage.getTeacherByID(teacherId));
+
+        subjectService.updateSubject(foundSubject);
+
+        return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
+    }
+
 }
