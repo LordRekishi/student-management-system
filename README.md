@@ -1,6 +1,6 @@
-# Java Enterprise Course - JAX-RS Laboration 1
+# Java Enterprise Course - JAX-RS Laboration 2
 
-A very simple JAX-RS application implementing the Payara server and a drop-and-create H2 database. First assignment of
+A very simple JAX-RS application implementing the Payara server and a drop-and-create H2 database. Second assignment of
 our Java Enterprise course at IT-Högskolan, Gothenburg.
 
 ---
