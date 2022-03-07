@@ -92,7 +92,7 @@ public class SubjectRest {
         return Response.ok().build();
     }
 
-    @Path("{id}/student")
+    @Path("{id}/students/add")
     @PUT
     public Response addStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
         Subject foundSubject = subjectService.getById(id);
@@ -101,13 +101,16 @@ public class SubjectRest {
         if (foundSubject == null || foundStudent == null)
             throw new EntitysNotFoundException(ErrorMessage.updateSubject());
 
+        if (foundSubject.getStudents().contains(foundStudent))
+            throw new EntitysNotFoundException(ErrorMessage.studentAlreadyInSet(studentId));
+
         foundSubject.addStudent(foundStudent);
         subjectService.updateSubject(foundSubject);
 
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
-    @Path("{id}/teacher")
+    @Path("{id}/teachers/add")
     @PUT
     public Response addTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
         Subject foundSubject = subjectService.getById(id);
@@ -122,7 +125,7 @@ public class SubjectRest {
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
-    @Path("{id}/student")
+    @Path("{id}/students/remove")
     @PUT
     public Response removeStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
         Subject foundSubject = subjectService.getById(id);
@@ -137,7 +140,7 @@ public class SubjectRest {
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
-    @Path("{id}/teacher")
+    @Path("{id}/teachers/remove")
     @PUT
     public Response removeTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
         Subject foundSubject = subjectService.getById(id);

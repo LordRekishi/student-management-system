@@ -110,6 +110,12 @@ public class ErrorMessage {
                 .type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 
+    public static Response studentAlreadyInSet(Long studentId) {
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new ErrorMessage("400", "STUDENT WITH ID" + studentId + " ALREADY EXISTS!", "/api/v1/subjects/add"))
+                .type(MediaType.APPLICATION_JSON_TYPE).build();
+    }
+
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
