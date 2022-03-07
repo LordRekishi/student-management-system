@@ -64,6 +64,10 @@ public class Subject {
         teacher.addOnlySubject(this);
     }
 
+    public void removeTeacher() {
+        this.teacher = null;
+    }
+
     public void addStudent(Student student) {
         students.add(student);
         student.addOnlySubject(this);

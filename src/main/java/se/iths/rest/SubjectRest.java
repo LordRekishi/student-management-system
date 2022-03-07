@@ -101,9 +101,6 @@ public class SubjectRest {
         if (foundSubject == null || foundStudent == null)
             throw new EntitysNotFoundException(ErrorMessage.updateSubject());
 
-        if (foundSubject.getStudents().contains(foundStudent))
-            throw new EntitysNotFoundException(ErrorMessage.studentAlreadyInSet(studentId));
-
         foundSubject.addStudent(foundStudent);
         subjectService.updateSubject(foundSubject);
 
@@ -128,32 +125,20 @@ public class SubjectRest {
     @Path("{id}/students/remove")
     @PUT
     public Response removeStudent(@PathParam("id") Long id, @QueryParam("student-id") Long studentId) {
-        Subject foundSubject = subjectService.getById(id);
-        Student foundStudent = studentService.getById(studentId);
-
-        if (foundSubject == null || foundStudent == null)
-            throw new EntitysNotFoundException(ErrorMessage.updateSubject());
-
-        foundSubject.removeStudent(foundStudent);
-        subjectService.updateSubject(foundSubject);
+        Subject foundSubject = subjectService.removeStudent(id, studentId);
 
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
     }
 
     @Path("{id}/teachers/remove")
     @PUT
-    public Response removeTeacher(@PathParam("id") Long id, @QueryParam("teacher-id") Long teacherId) {
+    public Response removeTeacher(@PathParam("id") Long id) {
         Subject foundSubject = subjectService.getById(id);
-        Teacher foundTeacher = teacherService.getById(teacherId);
 
-        if (foundSubject == null || foundTeacher == null)
+        if (foundSubject == null)
             throw new EntitysNotFoundException(ErrorMessage.updateSubject());
 
-        if (foundSubject.getTeacher() == foundTeacher)
-            foundSubject.setTeacher(null);
-        else
-            throw new EntitysNotFoundException(ErrorMessage.getTeacherByID(teacherId));
-
+        foundSubject.removeTeacher();
         subjectService.updateSubject(foundSubject);
 
         return Response.status(Response.Status.ACCEPTED).entity(foundSubject).build();
